@@ -1,70 +1,63 @@
 /// <reference types="Cypress" />
 
-it('type example', ()=> {
+it('type', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
         .get('[data-qa-node="phone-number"]')
-        .type(112223344)
+        .type(112233344)
 })
 
-it('focus example', ()=> {
+it('focus', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
-        .get('[data-qa-node="phone-number"]')
+        .get('[data-qa-node="amount"]')
         .focus()
 })
 
-it('focus blur', ()=> {
+it('blur', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
         .get('[data-qa-node="amount"]')
         .focus()
         .blur()
 })
 
-it('clear example', ()=> {
+it('clear', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
         .get('[data-qa-node="amount"]')
-        .type(112223344)
+        .type(999)
+        .wait(2000)
         .clear()
 })
 
-it('submit example', ()=> {
+it('submit', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
         .get('form[method="post"]')
         .submit()
 })
 
-it('click example', ()=> {
+it('click', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
         .get('[data-qa-value="manual"]')
         .click()
 })
 
-it('click example', ()=> {
-    cy.visit('https://next.privat24.ua/mobile?lang=en')
-        .get('[data-qa-value="manual"]')
-        .click()
-})
-
-it('rightclick example', ()=> {
+it('rightclick', ()=>{
     cy.visit('https://example.cypress.io/commands/actions')
         .contains('Right click to edit')
-        .scrollIntoView()
-        .wait(2000)
         .rightclick()
 })
 
-it('dblclick example', ()=> {
+it('dblclick', ()=>{
     cy.visit('https://yari-demos.prod.mdn.mozit.cloud/en-US/docs/Web/API/Element/dblclick_event/_samples_/Examples')
-        .get('h3')
+        .contains('My Card')
         .dblclick()
 })
 
-it('check example', ()=> {
-    cy.visit('https://www.facebook.com/r.php?locale=en_US&display=page')
+it('check', ()=>{
+    cy.visit('https://www.facebook.com/reg/?')
         .get('input[value="2"]')
         .check()
 })
 
-it('uncheck example', ()=> {
+it('uncheck', ()=>{
     cy.visit('https://en.privatbank.ua/')
         .get('#switch-input')
         .check({force: true})
@@ -72,7 +65,7 @@ it('uncheck example', ()=> {
         .uncheck({force: true})
 })
 
-it('select example', ()=> {
+it('select', ()=>{
     cy.visit('https://www.facebook.com/r.php?locale=en_US')
         .get('#month')
         .select('Feb')
@@ -82,21 +75,22 @@ it('select example', ()=> {
         .select('1991')
 })
 
-it('scrollIntoView example', ()=> {
+it('scrollIntoView', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
-        .wait(2000) // wait for load all requests for current page
         .get('[data-qa-node="lang"]')
+        .wait(2000)
         .scrollIntoView()
 })
 
-it('scrollTo example', ()=> {
+it('scrollTo', ()=>{
     cy.visit('https://next.privat24.ua/mobile?lang=en')
-    .wait(2000) // wait for load all requests for current page
-    cy.scrollTo(0, 450)
+    .wait(2000)
+    cy.scrollTo(0, 500)
 })
 
-it('trigger example', ()=> {
-    cy.visit('https://next.privat24.ua/mobile?lang=en')
+it.only('check', ()=>{
+    cy.visit('https://next.privat24.ua/?lang=en')
         .contains('Services')
+        .wait(2000)
         .trigger('mouseover')
 })
