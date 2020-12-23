@@ -11,14 +11,15 @@ beforeEach('setup success payment', ()=> {
         { fixture: 'confirmResponse/success.json' })
 })
 
-it.skip('Check archive info', ()=>{
+//a, b, e, p, s
+it('Check archive info', ()=>{
         cy.visit('https://next.privat24.ua?lang=en')
                 .get('[data-qa-node="menu"]')
                 .eq(2)
                 .click()
 })
 
-it("Replenishment of Ukrainian mobile phone number", () => {
+it.skip("Replenishment of Ukrainian mobile phone number", () => {
   basePage.open("https://next.privat24.ua/mobile?lang=en");
   mobileReplenishment.typePhoneNumber("686979712");
   basePage.typeAmount("1");
@@ -32,7 +33,6 @@ it("Replenishment of Ukrainian mobile phone number", () => {
   mobileReplenishment.checkPaymentCurrency("UAH");
   cy.contains('Confirm')
         .click()
-
 });
 
 it.skip("Money transfer between foreign cards", () => {
