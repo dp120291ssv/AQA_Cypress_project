@@ -20,7 +20,7 @@ export class BasePage{
 
     submitPayment(){
         cy.get('button[type="submit"]')
-             .click()
+             .click({force: true})
      }
 
 }

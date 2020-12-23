@@ -1,0 +1,46 @@
+{
+    "task_id": "cache",
+    "status": "success",
+    "data": [
+        {
+            "state": "p",
+            "paymentTypeCode": "P24MCM",
+            "paymentType": "p2p",
+            "moduleReference": "P24A832752476C01206",
+            "moduleId": "P24A",
+            "error": {
+                "code": "",
+                "description": ""
+            },
+            "details": "Personal funds transfer. ",
+            "date": "22.12.2020 20:48:53",
+            "currency": "UAH",
+            "amount": 1.0,
+            "payer": {
+                "name": "СЕМЕНОВ СЕРГІЙ ВОЛОДИМИРОВИЧ",
+                "currency": "UAH",
+                "crf": "3328009579",
+                "commission": 0.0,
+                "bank": "JSC CB PRIVATBANK",
+                "amount": 1.0,
+                "account": {
+                    "id": "",
+                    "number": "4149499610151407"
+                }
+            },
+            "receiver": {
+                "name": "СЕМЕНОВ СЕРГІЙ ВОЛОДИМИРОВИЧ",
+                "mfo": "305299",
+                "currency": "UAH",
+                "crf": "3328009579",
+                "commission": 0.0,
+                "bank": "JSC CB PRIVATBANK",
+                "amount": 1.0,
+                "account": {
+                    "id": "",
+                    "number": "4149499310273048"
+                }
+            }
+        }
+    ]
+}

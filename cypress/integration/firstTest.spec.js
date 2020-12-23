@@ -3,8 +3,23 @@ import { mobileReplenishment } from "../support/pages/mobileReplenishment";
 import { transfers } from "../support/pages/transfers";
 import { basePage } from "../support/pages/basePage";
 
+beforeEach('setup success payment', ()=> {
+        cy.intercept('https://next.privat24.ua/api/p24/pub/archive', 
+        { fixture: 'archiveResponse/archive.json' })
+
+        cy.intercept('https://next.privat24.ua/api/p24/pub/confirm', 
+        { fixture: 'confirmResponse/success.json' })
+})
+
+it.skip('Check archive info', ()=>{
+        cy.visit('https://next.privat24.ua?lang=en')
+                .get('[data-qa-node="menu"]')
+                .eq(2)
+                .click()
+})
+
 it("Replenishment of Ukrainian mobile phone number", () => {
-  basePage.open("https://next.privat24.ua/mobile");
+  basePage.open("https://next.privat24.ua/mobile?lang=en");
   mobileReplenishment.typePhoneNumber("686979712");
   basePage.typeAmount("1");
   basePage.typeDebitCardData("4552331448138217", "0524", "111");
@@ -15,9 +30,12 @@ it("Replenishment of Ukrainian mobile phone number", () => {
   mobileReplenishment.checkDebitAmountAndComission("2");
   mobileReplenishment.checkReceiverAmount("1");
   mobileReplenishment.checkPaymentCurrency("UAH");
+  cy.contains('Confirm')
+        .click()
+
 });
 
-it("Money transfer between foreign cards", () => {
+it.skip("Money transfer between foreign cards", () => {
   basePage.open("https://next.privat24.ua/money-transfer/card?lang=en");
   basePage.typeDebitCardData("4552331448138217", "0524", "111");
   transfers.typeDebitNameAndSurname("Shayne", "McConnell");
