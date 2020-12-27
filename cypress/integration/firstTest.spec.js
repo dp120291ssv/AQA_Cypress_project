@@ -2,23 +2,33 @@
 import { mobileReplenishment } from "../support/pages/mobileReplenishment";
 import { transfers } from "../support/pages/transfers";
 import { basePage } from "../support/pages/basePage";
+import { archivePage } from "../support/pages/archive";
 
-beforeEach('setup success payment', ()=> {
-        cy.intercept('https://next.privat24.ua/api/p24/pub/archive', 
-        { fixture: 'archiveResponse/archive.json' })
+beforeEach("setuo success response with stub", () => {
+  cy.intercept("https://next.privat24.ua/api/p24/pub/confirm/check?", {
+    fixture: "confirmResponse/success.json",
+  });
+});
 
-        cy.intercept('https://next.privat24.ua/api/p24/pub/confirm', 
-        { fixture: 'confirmResponse/success.json' })
-})
+//Example stub api response: state of archive: a, b, e
+it.skip("check success state of payment in the archive | public session", () => {
+  cy.intercept("https://next.privat24.ua/api/p24/pub/archive", {
+    fixture: "archiveResponse/success.json",
+  });
+  basePage.open("https://next.privat24.ua?lang=en");
+  archivePage.selectArchiveMenu();
+});
 
-//a, b, e, p, s
-it('Check archive info', ()=>{
-        cy.visit('https://next.privat24.ua?lang=en')
-                .get('[data-qa-node="menu"]')
-                .eq(2)
-                .click()
-})
+//Example stub api response: state of archive: a, b, e
+it("check error state of payment in the archive | public session", () => {
+  cy.intercept("https://next.privat24.ua/api/p24/pub/archive", {
+    fixture: "archiveResponse/error.json",
+  });
+  basePage.open("https://next.privat24.ua?lang=en");
+  archivePage.selectArchiveMenu();
+});
 
+//Example mock thank you screen in mobile replenishment proccess
 it.skip("Replenishment of Ukrainian mobile phone number", () => {
   basePage.open("https://next.privat24.ua/mobile?lang=en");
   mobileReplenishment.typePhoneNumber("686979712");
@@ -31,10 +41,10 @@ it.skip("Replenishment of Ukrainian mobile phone number", () => {
   mobileReplenishment.checkDebitAmountAndComission("2");
   mobileReplenishment.checkReceiverAmount("1");
   mobileReplenishment.checkPaymentCurrency("UAH");
-  cy.contains('Confirm')
-        .click()
+  cy.contains("Confirm").click();
 });
 
+//Example e2e test for transfers
 it.skip("Money transfer between foreign cards", () => {
   basePage.open("https://next.privat24.ua/money-transfer/card?lang=en");
   basePage.typeDebitCardData("4552331448138217", "0524", "111");
