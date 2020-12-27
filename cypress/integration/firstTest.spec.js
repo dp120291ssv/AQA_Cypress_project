@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+
 import { mobileReplenishment } from "../support/pages/mobileReplenishment";
 import { transfers } from "../support/pages/transfers";
 import { basePage } from "../support/pages/basePage";
