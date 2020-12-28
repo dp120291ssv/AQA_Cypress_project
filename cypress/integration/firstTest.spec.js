@@ -36,15 +36,15 @@ it.skip("Money transfer between foreign cards", () => {
 });
 
 //Example GET request
-it.skip("Example request GET", () => {
-  cy.request("https://next.privat24.ua/").then((response) => {
+it.skip("Example sending the GET request", () => {
+  cy.request("https://next.privat24.ua").then((response) => {
     console.log(response);
   });
 });
 
 //Example POST request
-it("Example request POST", () => {
-  const mobileData = {
+it("Example sending the POST request", () => {
+  const requestBody = {
     action: "info",
     phone: "+380686979712",
     amount: 50,
@@ -52,19 +52,19 @@ it("Example request POST", () => {
     cardCvv: "111",
     card: "4552331448138217",
     cardExp: "0524",
-    xref: "9f38d4d42c1bb772b9e04697f37dbf9d",
-    _: 1609095629770,
+    xref: "084ddda8622bd85ce838db5fbd96746d",
+    _: 1609142855434,
   };
 
   const headersData = {
     cookie:
-      "_ga=GA1.2.1276086127.1608750658; _gid=GA1.2.687351041.1609060591; pubkey=ba05d66470715444631937bd7183e844; fp=12; lfp=12/23/2020, 9:11:08 PM",
+      "_ga=GA1.2.957777321.1609142789; _gid=GA1.2.1882919372.1609142789; pubkey=772e1f4d0e0dc05be052c17b7f389871; fp=1; lfp=12/28/2020, 10:06:39 AM; pa=1609142799763.37130.7045217459772619next.privat24.ua0.5614400379940121+1",
   };
 
   cy.request({
     method: "POST",
     url: "https://next.privat24.ua/api/p24/pub/mobipay",
-    body: mobileData,
+    body: requestBody,
     headers: headersData,
   }).then((response) => {
     console.log(response.body);
