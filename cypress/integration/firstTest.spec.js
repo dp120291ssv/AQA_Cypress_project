@@ -11,7 +11,7 @@ beforeEach("setuo success response with stub", () => {
   });
 });
 
-//Example stub api response: state of archive: a, b, e
+//Example stub api success response: state of archive: a, b, e
 it.skip("check success state of payment in the archive | public session", () => {
   cy.intercept("https://next.privat24.ua/api/p24/pub/archive", {
     fixture: "archiveResponse/success.json",
@@ -20,7 +20,7 @@ it.skip("check success state of payment in the archive | public session", () => 
   archivePage.selectArchiveMenu();
 });
 
-//Example stub api response: state of archive: a, b, e
+//Example stub api error response: state of archive: a, b, e
 it("check error state of payment in the archive | public session", () => {
   cy.intercept("https://next.privat24.ua/api/p24/pub/archive", {
     fixture: "archiveResponse/error.json",
