@@ -35,14 +35,13 @@ it.skip("Money transfer between foreign cards", () => {
   transfers.checkComment("Cypress test");
 });
 
-//Example GET request
 it.skip("Example sending the GET request", () => {
   cy.request("https://next.privat24.ua").then((response) => {
     console.log(response);
   });
 });
 
-//Example POST request
+//Example HTTP POST request with expect verification of response
 it("Example sending the POST request", () => {
   const requestBody = {
     action: "info",
@@ -51,14 +50,14 @@ it("Example sending the POST request", () => {
     currency: "UAH",
     cardCvv: "111",
     card: "4552331448138217",
-    cardExp: "0524",
-    xref: "084ddda8622bd85ce838db5fbd96746d",
-    _: 1609142855434,
+    cardExp: "0526",
+    xref: "08ff0ad086fe9e4c5ab2e88a4bcee171",
+    _: 1609237038419,
   };
 
   const headersData = {
     cookie:
-      "_ga=GA1.2.957777321.1609142789; _gid=GA1.2.1882919372.1609142789; pubkey=772e1f4d0e0dc05be052c17b7f389871; fp=1; lfp=12/28/2020, 10:06:39 AM; pa=1609142799763.37130.7045217459772619next.privat24.ua0.5614400379940121+1",
+      "_ga=GA1.2.1276086127.1608750658; _gid=GA1.2.687351041.1609060591; pubkey=964d8434883ba595c7170ec0f1fb503a; fp=18; lfp=12/23/2020, 9:11:08 PM",
   };
 
   cy.request({
@@ -68,5 +67,47 @@ it("Example sending the POST request", () => {
     headers: headersData,
   }).then((response) => {
     console.log(response.body);
+    expect(response).to.have.property("status").to.equal(200);
+    expect(response.requestHeaders)
+      .to.have.property("cookie")
+      .not.be.oneOf(["", null]);
+    expect(response.body).to.have.property("status").to.equal("success");
+    expect(response.body.data).to.have.property("amount").to.equal("50.0");
+    expect(response.body.data).to.have.property("status").to.equal("ok");
   });
+});
+
+//Example HTTP POST request with should verification of response
+it("Example sending the POST request", () => {
+  const requestBody = {
+    action: "info",
+    phone: "+380686979712",
+    amount: 50,
+    currency: "UAH",
+    cardCvv: "111",
+    card: "4552331448138217",
+    cardExp: "0526",
+    xref: "08ff0ad086fe9e4c5ab2e88a4bcee171",
+    _: 1609237038419,
+  };
+
+  const headersData = {
+    cookie:
+      "_ga=GA1.2.1276086127.1608750658; _gid=GA1.2.687351041.1609060591; pubkey=964d8434883ba595c7170ec0f1fb503a; fp=18; lfp=12/23/2020, 9:11:08 PM",
+  };
+
+  cy.request({
+    method: "POST",
+    url: "https://next.privat24.ua/api/p24/pub/mobipay",
+    body: requestBody,
+    headers: headersData,
+  })
+    .its("body")
+    .should("contain", {
+      status: "success",
+    })
+    .its("data")
+    .should("contain", {
+      status: "ok",
+    });
 });
