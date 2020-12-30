@@ -3,7 +3,7 @@
     "status": "success",
     "data": [
         {
-            "state": "a",
+            "state": "e",
             "paymentTypeCode": "P24MBS",
             "paymentType": "mobipay",
             "moduleReference": "MBPA991565998",

@@ -10,7 +10,7 @@ beforeEach("setuo success response with stub", () => {
 });
 
 //Example stub api success response: state of archive: a, b, e
-it("check success state of payment in the archive | public session", () => {
+it.skip("check success state of payment in the archive | public session", () => {
   cy.intercept("https://next.privat24.ua/api/p24/pub/archive", {
     fixture: "archiveResponse/success.json",
   });
@@ -25,4 +25,6 @@ it("check error state of payment in the archive | public session", () => {
   });
   basePage.open("https://next.privat24.ua?lang=en");
   archivePage.selectArchiveMenu();
+
+  cy.wait(2000).get('tbody').toMatchImageSnapshot();
 });
